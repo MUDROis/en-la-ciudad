@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madrid Explorer - Spanish Adventure</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="game-header">
+        <img src="assets/logo.png" alt="Logo" class="header-logo">
+        <div class="progress-container">
+            <div class="rocket-progress">
+                <div class="rocket" id="rocket">🚀</div>
+                <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+            <div class="stage-indicators">
+                <div class="stage-dot active" data-stage="1">1<br><small>Vocabulario</small></div>
+                <div class="stage-dot" data-stage="2">2<br><small>Diálogos</small></div>
+                <div class="stage-dot" data-stage="3">3<br><small>Frases</small></div>
+            </div>
+        </div>
+        <div class="score-board"><span class="score-label">Score:</span><span class="score-value" id="score">0</span></div>
+    </header>
+
+    <main class="game-main">
+        <!-- STAGE 1 -->
+        <section id="stage1" class="stage active">
+            <div class="stage-header">
+                <h2>🎯 Stage 1: Match the Words</h2>
+                <p class="instruction">Drag and drop the Spanish words to the correct buildings in Madrid!</p>
+                <p class="spanish-hint"><em>Empareja las palabras españolas con los edificios</em></p>
+            </div>
+            <div class="game-area">
+                <div class="word-bank" id="wordBank"></div>
+                <div class="city-map" id="cityMap"></div>
+            </div>
+            <div class="feedback" id="stage1Feedback"></div>
+            <button class="next-button" id="stage1Next" onclick="goToStage(2)" style="display:none;">Next Stage → 🚀</button>
+        </section>
+
+        <!-- STAGE 2: Dialogues with map on right -->
+        <section id="stage2" class="stage">
+            <div class="stage-header">
+                <h2>💬 Stage 2: Ask for Directions</h2>
+                <p class="instruction">Read the dialogues and learn how to ask for and give directions.</p>
+                <p class="spanish-hint"><em>Lee los diálogos y aprende a pedir y dar indicaciones.</em></p>
+            </div>
+            <div id="stage2-content"></div>
+            <div class="feedback" id="stage2Feedback"></div>
+            <button class="next-button" id="stage2Next" onclick="goToStage(3)" style="display:none;">Final Mission → 🌟</button>
+        </section>
+
+        <!-- STAGE 3: Madrid landmark + Useful Phrases -->
+        <section id="stage3" class="stage">
+            <div class="stage-header">
+                <h2>🗺️ Stage 3: Useful Phrases & Landmark</h2>
+                <p class="instruction">Learn key directional phrases and locate Puerta del Sol on the map.</p>
+                <p class="spanish-hint"><em>Aprende frases útiles y encuentra la Puerta del Sol.</em></p>
+            </div>
+            <div id="usefulPhrases" class="useful-phrases"></div>
+            <div id="map" class="leaflet-map"></div>
+            <div class="feedback" id="stage3Feedback"></div>
+            <button class="next-button" id="stage3Complete" onclick="showVictory()" style="display:none;">Claim Your Badge! 🏆</button>
+        </section>
+
+        <!-- VICTORY -->
+        <section id="victory" class="stage">
+            <div class="victory-container">
+                <div class="trophy">🏆</div>
+                <h1>¡Felicidades!</h1>
+                <h2>You are now a <span class="highlight">Madrid Guide</span>!</h2>
+                <div class="stats">
+                    <div class="stat-box"><span class="stat-number" id="finalScore">0</span><span class="stat-label">Total Score</span></div>
+                    <div class="stat-box"><span class="stat-number">3</span><span class="stat-label">Stages Completed</span></div>
+                    <div class="stat-box"><span class="stat-number" id="accuracy">0%</span><span class="stat-label">Accuracy</span></div>
+                </div>
+                <div class="badge-display"><div class="badge"><span class="badge-icon">🇪🇸</span><span class="badge-name">Madrid Guide</span></div></div>
+                <p class="victory-message">"¡Excelente trabajo! Ahora puedes moverte por Madrid con confianza."</p>
+                <button class="restart-button" onclick="restartGame()">Play Again 🔄</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
